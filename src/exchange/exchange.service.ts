@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateExchangeDto } from './dto/create-exchange.dto';
 import { ExchangeResponseDto } from './dto/exchange-response.dto';
+import { UpdateExchangeRateDto } from './dto/update-exchange-rate.dto';
 
 @Injectable()
 export class ExchangeService {
@@ -21,5 +22,11 @@ export class ExchangeService {
       toCurrency: dto.toCurrency,
       exchangeRate: rate,
     };
+  }
+
+  updateExchangeRate(dto: UpdateExchangeRateDto): any {
+    const key = `${dto.fromCurrency}_${dto.toCurrency}`;
+    this.exchangeRates[key] = dto.rate;
+    return { message: 'Tipo de cambio actualizado con éxito' };
   }
 }
