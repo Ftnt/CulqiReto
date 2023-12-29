@@ -9,7 +9,7 @@ export class ExchangeController {
   constructor(private exchangeService: ExchangeService) {}
 
   @Post()
-  @UseGuards(AuthGuard('jwt')) // Asegura que se use autenticación JWT
+  @UseGuards(AuthGuard('jwt'))
   async calculate(
     @Body() createExchangeDto: CreateExchangeDto,
   ): Promise<ExchangeResponseDto> {
