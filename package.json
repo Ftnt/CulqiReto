@@ -9,7 +9,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "docker:build": "docker build -t exchange-api .",
-    "docker:dev": "npm run docker:build && docker run -p 3000:3000 -v $(pwd):/usr/src/app exchange-api",
+    "docker:dev": "docker run -e JWT_SECRET=secret_Culqi2024 -p 3000:3000 -v $(pwd):/usr/src/app exchange-api ",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
+    "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^10.0.0",
     "@nestjs/jwt": "^10.2.0",
     "@nestjs/passport": "^10.0.3",

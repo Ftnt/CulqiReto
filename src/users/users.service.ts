@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class UsersService {
@@ -15,7 +15,17 @@ export class UsersService {
     },
   ];
 
-  async findOne(username: string): Promise<any | undefined> {
-    return this.users.find((user) => user.username === username);
+  async findOne(username: string): Promise<any> {
+    if (!username) {
+      throw new Error('Se debe proporcionar un nombre de usuario');
+    }
+
+    const user = this.users.find((user) => user.username === username);
+
+    if (!user) {
+      throw new NotFoundException(`Usuario no encontrado: ${username}`);
+    }
+
+    return user;
   }
 }
